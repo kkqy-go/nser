@@ -1,0 +1,55 @@
+# .goreleaser.yml
+# Visit https://goreleaser.com/customization/ for more options
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: "nser"
+    main: .
+    binary: nser
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+
+# The archives section with format: binary will attach the binaries directly.
+archives:
+  - id: "nser"
+    builds:
+      - "nser"
+    format: binary
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - 'Merge pull request'
+      - 'Merge branch'
+
+release:
+  github:
+    owner: kkqy
+    name: nser
+  draft: false
+  prerelease: auto
+  # extra_files are attached directly to the release.
+  extra_files:
+    - glob: LICENSE
+    - glob: README.md
+    - glob: README.zh-CN.md
