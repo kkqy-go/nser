@@ -21,7 +21,7 @@
 
 1.  克隆仓库：
     ```sh
-    git clone https://github.com/kkqy/nser.git
+    git clone https://github.com/kkqy-go/nser.git
     cd nser
     ```
 

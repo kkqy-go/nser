@@ -23,7 +23,7 @@ This tool can easily solve such problems.
 
 1.  Clone the repository:
     ```sh
-    git clone https://github.com/kkqy/nser.git
+    git clone https://github.com/kkqy-go/nser.git
     cd nser
     ```
 
